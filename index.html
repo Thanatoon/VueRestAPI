@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- https://www.bootstrapcdn.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>FBIAPITest</title>
+</head>
+<body>
+<div id="app">
+<h1>FBI Liste</h1>
+<h2>Se hele listen</h2>
+<button id="getListButton" v-on:click="getFBIList" class="btn btn-primary">Se hele FBI listen</button>
+<button id="nextPageButton" v-on:click="previousPage" v-if="FBIList && pageData > 1" class="btn btn-primary">Sidste side</button>
+<button id="nextPageButton" v-on:click="nextPage" v-if="FBIList" class="btn btn-primary">Næste side</button>
+<br />
+    <table class="table" id="FBIlist" v-if="FBIList">
+        <tr>
+            <td>Title</td> <td>Hair Color</td> <td>Picture</td> <td>Description</td> <td>Details</td>
+        </tr>
+        <tr v-for="file in FBIList.items">
+        <td>{{file.title}}</td> <td>{{file.hair}}</td> <td><img :src="file.images[0].thumb"></td> <td>{{file.description}}</td> <td  v-html="file.details"></td>
+        </tr>
+    </table>
+    <button id="nextPageButton" v-on:click="previousPage" v-if="FBIList && pageData > 1" class="btn btn-primary">Forrige side</button>
+    <button id="nextPageButton" v-on:click="nextPage" v-if="FBIList" class="btn btn-primary">Næste side</button>
+</div>
+    <script src="index.js"></script>
+</body>
+</html> 
